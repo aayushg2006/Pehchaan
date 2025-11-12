@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.math.BigDecimal;
+// import java.math.BigDecimal; // No longer needed
 
 @Data
 @Builder
@@ -18,8 +18,9 @@ public class ProjectResponse {
     private double latitude;
     private double longitude;
     private Long contractorId;
-    private BigDecimal wageRate;
-    private String wageType;
+    // ❌ REMOVED: Wage fields are no longer part of a Project
+    // private BigDecimal wageRate;
+    // private String wageType;
 
     /**
      * A helper method to convert a Project Entity into this DTO.
@@ -32,8 +33,9 @@ public class ProjectResponse {
                 .latitude(project.getLocation().getY()) // In PostGIS, Y is Latitude
                 .longitude(project.getLocation().getX()) // In PostGIS, X is Longitude
                 .contractorId(project.getContractor().getId())
-                .wageRate(project.getWageRate())
-                .wageType(project.getWageType())
+                // ❌ REMOVED: Wage fields
+                // .wageRate(project.getWageRate())
+                // .wageType(project.getWageType())
                 .build();
     }
 }

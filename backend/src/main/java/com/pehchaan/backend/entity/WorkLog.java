@@ -28,6 +28,7 @@ import lombok.NoArgsConstructor;
 public class WorkLog {
 
     public enum WorkStatus {
+        ACTIVE, // ✅ ADD THIS STATUS
         PENDING_APPROVAL,
         APPROVED,
         PAID,

@@ -1,0 +1,162 @@
+.contractor-portal {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.portal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+/* On smaller screens, stack the grid */
+@media (max-width: 900px) {
+  .portal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.portal-card {
+  background: var(--background-white);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.portal-card h3 {
+  margin-top: 0;
+  color: var(--pehchaan-blue);
+  border-bottom: 2px solid var(--background-light);
+  padding-bottom: 0.75rem;
+}
+
+/* Use the auth form styles for our project form */
+.project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-form .form-group {
+  margin-bottom: 0;
+}
+
+.project-form .auth-button {
+  margin-top: 0.5rem;
+}
+
+.project-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.project-item {
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.2s ease;
+}
+.project-item:hover {
+  border-color: var(--pehchaan-blue);
+  box-shadow: 0 4px 10px rgba(0, 87, 255, 0.1);
+}
+
+.project-item h4 {
+  margin: 0 0 0.5rem 0;
+}
+
+.project-item p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-medium);
+}
+
+/* ... (all existing styles) ... */
+
+.portal-grid {
+  /* ✅ CHANGE: Make the right column (logs) wider */
+  grid-template-columns: 1fr 1.5fr;
+}
+
+/* ... (all existing styles) ... */
+
+.project-item p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-medium);
+}
+
+/* ✅ --- NEW STYLES --- */
+
+.ledger-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ledger-item {
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 1rem;
+  display: grid; /* Use grid for alignment */
+  grid-template-columns: 1fr auto; /* Content on left, button on right */
+  gap: 1rem;
+  align-items: center;
+}
+
+.ledger-item h4 {
+  margin: 0 0 0.25rem 0;
+}
+
+.ledger-item p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: var(--text-medium);
+}
+
+.ledger-item .wage {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.status-badge {
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.status-PENDING_APPROVAL { color: #d66a00; background-color: #fff3e6; border: 1px solid #d66a00; }
+.status-APPROVED { color: #00B74A; background-color: #e6f8ee; border: 1px solid #00B74A; }
+
+.approve-button {
+  background-color: var(--success-green);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap; /* Keep text on one line */
+}
+.approve-button:hover {
+  background-color: #009e3e;
+}
+.approve-button:disabled {
+  background-color: var(--border-light);
+  cursor: not-allowed;
+}

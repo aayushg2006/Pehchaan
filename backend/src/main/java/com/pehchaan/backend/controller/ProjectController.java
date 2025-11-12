@@ -20,6 +20,7 @@ public class ProjectController {
     /**
      * POST /api/projects
      * Creates a new project. This endpoint is restricted to Contractors only.
+     * The CreateProjectRequest DTO no longer contains wage info.
      */
     @PostMapping
     @PreAuthorize("hasRole('CONTRACTOR')") // Only users with ROLE_CONTRACTOR can access
@@ -40,4 +41,7 @@ public class ProjectController {
         List<ProjectResponse> projects = projectService.getMyProjects();
         return ResponseEntity.ok(projects);
     }
+
+    // ❌ REMOVED: The GET /api/projects endpoint is deleted.
+    // Laborers now use GET /api/assignments/my-projects to find work.
 }

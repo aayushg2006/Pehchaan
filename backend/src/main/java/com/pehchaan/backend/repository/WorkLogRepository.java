@@ -25,4 +25,10 @@ public interface WorkLogRepository extends JpaRepository<WorkLog, Long> {
      * This is how we'll know if a user is currently on the clock.
      */
     Optional<WorkLog> findByLaborerIdAndCheckOutTimeIsNull(Long laborerId);
+
+    /**
+     * ✅ ADDED: Finds all work logs for a given list of project IDs.
+     * This is for the contractor's dashboard.
+     */
+    List<WorkLog> findByProjectIdIn(List<Long> projectIds);
 }

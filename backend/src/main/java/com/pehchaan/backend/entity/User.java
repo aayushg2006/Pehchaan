@@ -2,9 +2,9 @@ package com.pehchaan.backend.entity;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set; // Import Set for skills
+import java.util.Set; 
 
-import org.locationtech.jts.geom.Point; // Import the PostGIS Point type
+import org.locationtech.jts.geom.Point; 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,6 +20,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany; // ✅ ADD
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -50,29 +51,30 @@ public class User implements UserDetails {
     private Role role;
 
     // --- NEW PROFILE FIELDS (for Phase 2) ---
-    // These will be null after registration
-    
     private String firstName;
     private String lastName;
     
-    // For the "Pehchaan Verified" Score
     private Double rating;
+    
+    // ✅ FIX: Add @Builder.Default to respect the default value
+    @Builder.Default
     @Column(columnDefinition = "boolean default false")
     private Boolean isVerified = false;
     
-    // For Laborers: "Available", "Offline", "On_Contract"
+    // For Laborers: "AVAILABLE", "OFFLINE", "ON_CONTRACT"
     private String status; 
     
-    // For the "Nearby Worker" feature
     @Column(columnDefinition = "geometry(Point,4326)")
     private Point currentLocation;
 
-    // For Laborers: Stores a list of their skills
     @ElementCollection(fetch = FetchType.LAZY)
     @CollectionTable(name = "user_skills", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "skill")
     private Set<String> skills; // e.g., ["PLUMBER", "ELECTRICIAN"]
 
+    // ✅ ADD: Link to the assignments this user has
+    @OneToMany(mappedBy = "laborer")
+    private Set<Assignment> assignments;
     
     // --- UserDetails Methods (Required by Spring Security) ---
 
@@ -83,7 +85,6 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        // For our app, the "username" is the phone number.
         return phone;
     }
 
