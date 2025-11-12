@@ -1,68 +1,73 @@
+/* --- TRUST & CLARITY THEME - GLOBAL STYLES --- */
+
+/* 1. Import our chosen fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap');
+
+/* 2. Define our color palette as CSS variables */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --font-heading: 'Inter', sans-serif;
+  --font-body: 'Roboto', sans-serif;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --pehchaan-blue: #0057FF;
+  --pehchaan-blue-dark: #0048d6;
+  --action-orange: #FF7A00;
+  --action-orange-dark: #e66e00;
+  --success-green: #00B74A;
+  --error-red: #D30000;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  --text-dark: #212529;
+  --text-medium: #6c757d;
+  --border-light: #dee2e6;
+  --background-light: #F8F9FA;
+  --background-white: #FFFFFF;
+}
+
+/* 3. Set global defaults */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  background-color: var(--background-light); /* App Background */
+  color: var(--text-dark);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* 4. Make all elements size themselves predictably */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 5. Clean up link styles */
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  text-decoration: none;
+  color: var(--pehchaan-blue);
+  transition: color 0.2s ease;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--pehchaan-blue-dark);
 }
 
-body {
-  margin: 0;
+/* --- MAIN APP LAYOUT --- */
+
+/* This creates a full-height, flexible layout. 
+  'min-height: 100vh' ensures our app always takes up the full screen height,
+  which allows us to vertically center content.
+*/
+.app-container {
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  flex-direction: column;
   min-height: 100vh;
+  width: 100%;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* This is for our main content area inside the dashboard */
+.portal-content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  flex-grow: 1;
 }

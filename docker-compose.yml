@@ -12,6 +12,7 @@ services:
     environment:
       # This is the ONLY env var the backend needs now
       - SUPABASE_PASSWORD=${SUPABASE_PASSWORD}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
     extra_hosts:
       - "host.docker.internal:host-gateway"
       

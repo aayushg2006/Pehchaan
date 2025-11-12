@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+
+/* --- MAIN APP LAYOUT --- */
+
+/* This is our main container. 
+  - 'display: flex' and 'flex-direction: column' make it a flexible vertical container.
+  - 'min-height: 100vh' ensures it always takes up at least the full height of the screen.
+*/
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

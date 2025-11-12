@@ -1,0 +1,57 @@
+.app-header {
+  width: 100%;
+  background: var(--background-white);
+  border-bottom: 1px solid var(--border-light);
+  padding: 0 2rem;
+  font-family: var(--font-heading);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 70px;
+}
+
+.header-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--pehchaan-blue);
+  text-decoration: none;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.user-role {
+  font-size: 0.9rem;
+  color: var(--text-medium);
+  font-weight: 500;
+  /* Hide on small screens */
+  @media (max-width: 600px) {
+    display: none;
+  }
+}
+
+.logout-button {
+  background: none;
+  border: 1px solid var(--error-red);
+  color: var(--error-red);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.logout-button:hover {
+  background-color: var(--error-red);
+  color: white;
+}

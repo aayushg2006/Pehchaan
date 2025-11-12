@@ -1,0 +1,114 @@
+/* --- NEW RESPONSIVE AUTH FORM DESIGN --- */
+
+/* This creates our 2-column layout.
+  On desktop, it's a 50/50 split.
+  On mobile, it will collapse to a single column.
+*/
+.auth-layout {
+  display: flex;
+  width: 100%;
+  flex-grow: 1; /* Makes the layout fill the full screen height */
+  font-family: var(--font-heading);
+}
+
+/* 1. The Left Side (Graphic & Brand) */
+.auth-graphic {
+  width: 50%;
+  background: linear-gradient(135deg, var(--pehchaan-blue), var(--pehchaan-blue-dark));
+  color: var(--background-white);
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-graphic-logo {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.auth-graphic-subtitle {
+  font-size: 1.25rem;
+  font-family: var(--font-body);
+  opacity: 0.9;
+  line-height: 1.6;
+  max-width: 450px;
+}
+
+/* 2. The Right Side (Form) */
+.auth-content {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertically centers the form card */
+  padding: 2rem;
+  background: var(--background-light);
+  overflow-y: auto; /* Allows scrolling on small/medium screens if form is long */
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.5rem 3rem;
+  background: var(--background-white);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-light);
+}
+
+.auth-form h2 {
+  text-align: center;
+  color: var(--text-dark);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  font-size: 1.75rem;
+}
+
+.auth-form p {
+  text-align: center;
+  color: var(--text-medium);
+  margin-bottom: 2rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.form-group { margin-bottom: 1.5rem; }
+.form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; font-size: 0.9rem; color: var(--text-medium); }
+.form-group input, .form-group select { width: 100%; padding: 0.85rem 1rem; border: 1px solid var(--border-light); border-radius: 8px; font-size: 1rem; font-family: var(--font-body); box-sizing: border-box; transition: border-color 0.2s ease, box-shadow 0.2s ease; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--pehchaan-blue); box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.1); }
+.auth-button { width: 100%; padding: 0.9rem; border: none; border-radius: 8px; background-color: var(--action-orange); color: white; font-family: var(--font-heading); font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 15px rgba(255, 122, 0, 0.2); }
+.auth-button:hover { background-color: var(--action-orange-dark); box-shadow: 0 6px 20px rgba(255, 122, 0, 0.3); transform: translateY(-2px); }
+.error-message { color: var(--error-red); background-color: #fff0f0; border: 1px solid var(--error-red); padding: 0.75rem 1rem; border-radius: 8px; text-align: center; margin-bottom: 1.5rem; font-size: 0.9rem; font-family: var(--font-body); }
+.auth-switch { margin-top: 2rem; text-align: center; font-size: 0.9rem; color: var(--text-medium); }
+.auth-switch a { color: var(--pehchaan-blue); font-weight: 600; }
+.auth-switch a:hover { text-decoration: underline; }
+
+/* Custom Checkbox Styles */
+.skill-checkbox-group { display: flex; flex-direction: column; gap: 0.75rem; }
+.skill-label { display: flex; align-items: center; cursor: pointer; font-weight: 500; color: var(--text-dark); font-family: var(--font-body); }
+.skill-label input[type="checkbox"] { appearance: none; -webkit-appearance: none; width: 20px; height: 20px; border: 2px solid var(--border-light); border-radius: 4px; margin-right: 0.75rem; cursor: pointer; position: relative; transition: all 0.2s ease; }
+.skill-label input[type="checkbox"]:checked { background-color: var(--pehchaan-blue); border-color: var(--pehchaan-blue); }
+.skill-label input[type="checkbox"]::after { content: ''; position: absolute; display: none; left: 6px; top: 2px; width: 5px; height: 10px; border: solid white; border-width: 0 3px 3px 0; transform: rotate(45deg); }
+.skill-label input[type="checkbox"]:checked::after { display: block; }
+
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 900px) {
+  /* On tablets & mobile, hide the graphic and make the form column full-width */
+  .auth-graphic {
+    display: none;
+  }
+  .auth-content {
+    width: 100%;
+    align-items: flex-start; /* Align to top on mobile */
+    padding: 2rem 1rem;
+  }
+  .auth-form {
+    box-shadow: none;
+    border: none;
+    padding: 1rem;
+  }
+}
