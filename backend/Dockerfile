@@ -1,38 +1,44 @@
+# ============================
 # Stage 1: Build the application
-# We use a Java 21 JDK image as requested
+# ============================
 FROM eclipse-temurin:21-jdk AS builder
 
-# Set the working directory inside the container
+# Install CA certificates to fix TLS errors (bad_record_mac)
+USER root
+RUN apt-get update && apt-get install -y ca-certificates && update-ca-certificates
+
+# Set the working directory
 WORKDIR /app
 
-# Copy the Gradle wrapper and build file
+# Copy Gradle wrapper and config files
 COPY gradlew .
 COPY gradle ./gradle
 COPY build.gradle .
 COPY settings.gradle .
 
-# ✅ FIX: Force the JVM to use TLSv1.2 for network requests
-ENV JAVA_OPTS="-Dhttps.protocols=TLSv1.2"
+# Prepare wrapper permissions
+RUN chmod +x gradlew
 
-# Download dependencies
-RUN ./gradlew dependencies
+# Force fresh dependency download (prevents corrupted cache)
+RUN ./gradlew --no-daemon --refresh-dependencies dependencies
 
-# Copy the rest of the source code
+# Copy the full source code
 COPY src ./src
 
-# Change 'build' to 'bootJar' to build only the executable fat jar
-RUN ./gradlew bootJar --no-daemon
+# Build fat jar only (bootJar)
+RUN ./gradlew clean bootJar --no-daemon
 
-# Stage 2: Create the final, small image
+
+# ============================
+# Stage 2: Create the final runtime image
+# ============================
 FROM eclipse-temurin:21-jre
 
 WORKDIR /app
 
-# Explicitly copy the correct jar file (based on your build.gradle)
-COPY --from=builder /app/build/libs/backend-0.0.1-SNAPSHOT.jar app.jar
+# Copy final jar
+COPY --from=builder /app/build/libs/*.jar app.jar
 
-# Expose the port that Spring Boot runs on
 EXPOSE 8080
 
-# This is the command that will run when the container starts
 ENTRYPOINT ["java", "-jar", "app.jar"]
