@@ -25,25 +25,24 @@ public class WorkerSearchRepository {
     }
 
     /**
-     * ✅ FIXED: Switched to positional parameters (?1, ?2)
+     * ✅ FIXED: Switched to ordinal parameters ?1 and ?2.
+     * ?1 maps to the first method argument (consumerLocation).
+     * ?2 maps to the second method argument (skill).
      */
-@SuppressWarnings("unchecked")
-public List<User> findNearbyAvailableWorkers(String skill, Point consumerLocation) {
-    // ✅ FINAL FIX: Use CAST(:location AS geography) instead of :location::geography
-    // This stops Hibernate from misreading the parameter name.
-    String sql = "SELECT * FROM users u " +
-                 "WHERE u.role = 'ROLE_LABOR' " +
-                 "AND u.status = 'AVAILABLE' " +
-                 "AND EXISTS (SELECT 1 FROM user_skills s WHERE s.user_id = u.id AND UPPER(s.skill) = UPPER(:skill)) " +
-                 "AND ST_DWithin(u.current_location::geography, CAST(:location AS geography), 5000) " +
-                 "ORDER BY ST_Distance(u.current_location::geography, CAST(:location AS geography)) " +
-                 "LIMIT 10"; 
+    @SuppressWarnings("unchecked")
+    public List<User> findNearbyAvailableWorkers(Point consumerLocation, String skill) {
+        String sql = "SELECT * FROM users u " +
+                     "WHERE u.role = 'ROLE_LABOR' " +
+                     "AND u.status = 'AVAILABLE' " +
+                     "AND EXISTS (SELECT 1 FROM user_skills s WHERE s.user_id = u.id AND UPPER(s.skill) = UPPER(?2)) " +
+                     "AND ST_DWithin(u.current_location::geography, ?1::geography, 5000) " +
+                     "ORDER BY ST_Distance(u.current_location::geography, ?1::geography) " +
+                     "LIMIT 10"; 
 
-    Query query = entityManager.createNativeQuery(sql, User.class);
-
-    query.setParameter("location", consumerLocation);
-    query.setParameter("skill", skill);
-
-    return query.getResultList();
-}
+        Query query = entityManager.createNativeQuery(sql, User.class);
+        query.setParameter(1, consumerLocation); // ✅ ?1
+        query.setParameter(2, skill); // ✅ ?2
+        
+        return query.getResultList();
+    }
 }

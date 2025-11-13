@@ -28,7 +28,8 @@ public class WorkerService {
         );
 
         // 2. Call the repository to find workers
-        return workerSearchRepository.findNearbyAvailableWorkers(skill, consumerLocation)
+        // ✅ FIXED: Swapped the argument order to (consumerLocation, skill)
+        return workerSearchRepository.findNearbyAvailableWorkers(consumerLocation, skill)
                 .stream()
                 .map(ProfileResponse::fromEntity) // Convert User entities to safe DTOs
                 .collect(Collectors.toList());
