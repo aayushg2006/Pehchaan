@@ -1,42 +1,23 @@
 import api from './api'; // Import our main Axios instance
 
 /**
- * Fetches the profile for the currently logged-in user.
+ * Fetches all projects for the currently logged-in contractor.
  */
-const getMyProfile = () => {
-  return api.get('/api/profile/me');
+const getMyProjects = () => {
+  return api.get('/api/projects/my-projects');
 };
 
 /**
- * Updates the profile for the currently logged-in user.
- * @param {object} profileData - An object containing firstName, lastName, and skills
+ * Creates a new project.
+ * @param {object} projectData - { name, address, latitude, longitude }
  */
-const updateMyProfile = (profileData) => {
-  return api.put('/api/profile/me', profileData);
+const createProject = (projectData) => {
+  return api.post('/api/projects', projectData);
 };
 
-/**
- * ✅ ADDED: Updates the user's availability status.
- * @param {string} status - e.g., "AVAILABLE" or "OFFLINE"
- */
-const updateMyStatus = (status) => {
-  return api.put('/api/profile/me/status', { status });
+const projectService = {
+  getMyProjects,
+  createProject,
 };
 
-/**
- * ✅ ADDED: Updates the user's current GPS location.
- * @param {number} latitude 
- * @param {number} longitude 
- */
-const updateMyLocation = (latitude, longitude) => {
-  return api.put('/api/profile/me/location', { latitude, longitude });
-};
-
-const profileService = {
-  getMyProfile,
-  updateMyProfile,
-  updateMyStatus,    // ✅ EXPORT
-  updateMyLocation,  // ✅ EXPORT
-};
-
-export default profileService;
+export default projectService;
