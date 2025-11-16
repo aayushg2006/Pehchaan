@@ -31,13 +31,13 @@ public class WorkerSearchRepository {
      */
     @SuppressWarnings("unchecked")
     public List<User> findNearbyAvailableWorkers(Point consumerLocation, String skill) {
-        String sql = "SELECT * FROM users u " +
+    String sql = "SELECT * FROM users u " +
                      "WHERE u.role = 'ROLE_LABOR' " +
                      "AND u.status = 'AVAILABLE' " +
                      "AND EXISTS (SELECT 1 FROM user_skills s WHERE s.user_id = u.id AND UPPER(s.skill) = UPPER(?2)) " +
-                     "AND ST_DWithin(u.current_location::geography, ?1::geography, 5000) " +
-                     "ORDER BY ST_Distance(u.current_location::geography, ?1::geography) " +
-                     "LIMIT 10"; 
+                     "AND ST_DWithin(CAST(u.current_location AS geography), CAST(?1 AS geography), 5000) " +
+                     "ORDER BY ST_Distance(CAST(u.current_location AS geography), CAST(?1 AS geography)) " +
+                     "LIMIT 10";
 
         Query query = entityManager.createNativeQuery(sql, User.class);
         query.setParameter(1, consumerLocation); // ✅ ?1

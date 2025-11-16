@@ -160,3 +160,102 @@
   background-color: var(--border-light);
   cursor: not-allowed;
 }
+
+/* ... (all existing styles) ... */
+
+/* ✅ --- NEW STYLES --- */
+
+/* Make search controls a grid for address */
+.search-controls {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+}
+.search-controls .form-group {
+  margin: 0;
+}
+.search-controls .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.search-controls .form-group input,
+.search-controls .form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+/* Active Gig Card */
+.active-gig-card {
+  text-align: center;
+  padding: 2rem;
+}
+.active-gig-card h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+}
+.active-gig-card p {
+  font-size: 1.1rem;
+  color: var(--text-medium);
+  line-height: 1.6;
+}
+.gig-total {
+  font-size: 1.2rem;
+  color: var(--text-dark);
+}
+.gig-total-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--pehchaan-blue);
+  margin-bottom: 0.5rem;
+}
+.gig-total-final {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+.payment-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.payment-buttons .cancel-button {
+  background: none;
+  border: 1px solid var(--text-medium);
+  color: var(--text-dark);
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Card Status Colors */
+.status-requested { background-color: #e6f0ff; border-color: #0057FF; }
+.status-accepted { background-color: #e6f8ee; border-color: #00B74A; }
+.status-in-progress { background-color: #e6f8ee; border-color: #00B74A; }
+.status-pending-payment { background-color: #fff3e6; border-color: #FF7A00; }
+.status-pending-payment .auth-button { background-color: var(--pehchaan-blue); }
+.status-pending-payment .auth-button:hover { background-color: var(--pehchaan-blue-dark); }
+
+/* Gig History */
+.gig-history {
+  margin-top: 2rem;
+}
+.status-COMPLETED {
+  color: var(--text-medium);
+  background-color: var(--background-light);
+  border: 1px solid var(--border-light);
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  border-radius: 4px;
+  display: inline-block;
+}
